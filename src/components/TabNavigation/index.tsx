@@ -1,5 +1,6 @@
-import { JSX, useState, FC } from "react";
+import { JSX, FC, useEffect } from "react";
 import { NavContainer, Navigation, Container, NavContent } from "./styled";
+import useTabNavigation from "../../hooks/useTabNavigation";
 
 type Tab = {
   id: string;
@@ -12,26 +13,30 @@ type Props = {
 };
 
 const TabNavigation: FC<Props> = ({ Tabs }): JSX.Element => {
-  const [activeTab, setActiveTab] = useState<string>("1");
+  const { setSteps, currentStep, setCurrentStep } = useTabNavigation();
+  
+  useEffect(() => {
+    setSteps(Tabs.length);
+  });
 
   const handleTabClick = (id: string) => {
-    setActiveTab(id);
+    setCurrentStep(id);
   };
 
   return (
     <Container>
-    <NavContainer>
-      {Tabs.map((tab, key) => (
-        <>
-        <Navigation onClick={() => handleTabClick(tab.id)} active={parseInt(activeTab, 10) === key + 1} key={tab.id}>
-          {tab.label}
-        </Navigation>
-        </>
-      ))}
-    </NavContainer>
-    <NavContent>
-        {Tabs.find((tab) => tab.id === activeTab)?.content}
-    </NavContent>
+      <NavContainer>
+        {Tabs.map((tab, key) => (
+          <>
+          <Navigation onClick={() => handleTabClick(tab.id)} active={parseInt(currentStep, 10) === key + 1} key={tab.id}>
+            {tab.label}
+          </Navigation>
+          </>
+        ))}
+      </NavContainer>
+      <NavContent>
+          {Tabs.find((tab) => tab?.id === currentStep)?.content}
+      </NavContent>
     </Container>
   );
 };

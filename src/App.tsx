@@ -1,5 +1,7 @@
 import { JSX } from 'react';
 import TabNavigation from './components/TabNavigation';
+import Switch from './components/Switch';
+import { TabNavigationProvider } from './context/TabNavigationContext';
 
 const TabsContent = [
   { id: "1", label: "Liability", content: "liability contebt" },
@@ -9,7 +11,10 @@ const TabsContent = [
 
 function App() : JSX.Element {
   return (
-    <TabNavigation Tabs={TabsContent} />
+    <TabNavigationProvider>
+      <Switch />
+      <TabNavigation Tabs={TabsContent} />
+    </TabNavigationProvider>
   );
 }
 

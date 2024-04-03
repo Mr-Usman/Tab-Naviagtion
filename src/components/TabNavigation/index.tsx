@@ -12,8 +12,8 @@ type Props = {
   Tabs: Tab[];
 };
 
-const TabNavigation: FC<Props> = ({ Tabs }): JSX.Element => {
-  const { setSteps, currentStep, setCurrentStep } = useTabNavigation();
+const TabNavigation: FC<Props> = ({ Tabs }): JSX.Element | null => {
+  const { setSteps, currentStep, setCurrentStep, defaultActive } = useTabNavigation();
   
   useEffect(() => {
     setSteps(Tabs.length);
@@ -22,6 +22,8 @@ const TabNavigation: FC<Props> = ({ Tabs }): JSX.Element => {
   const handleTabClick = (id: string) => {
     setCurrentStep(id);
   };
+
+  if(!defaultActive) return null;
 
   return (
     <Container>

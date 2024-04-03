@@ -1,5 +1,6 @@
 import { JSX } from 'react';
 import TabNavigation from './components/TabNavigation';
+import Stepper from './components/Stepper';
 import Switch from './components/Switch';
 import { TabNavigationProvider } from './context/TabNavigationContext';
 
@@ -14,6 +15,7 @@ function App() : JSX.Element {
     <TabNavigationProvider>
       <Switch />
       <TabNavigation Tabs={TabsContent} />
+      <Stepper />
     </TabNavigationProvider>
   );
 }

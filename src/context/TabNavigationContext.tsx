@@ -5,6 +5,8 @@ type TabNavigationContextType = {
   setCurrentStep: Dispatch<SetStateAction<string>>;
   steps: number;
   setSteps: Dispatch<SetStateAction<number>>;
+  defaultActive: boolean;
+  setDefaultActive: Dispatch<SetStateAction<boolean>>;
 };
 
 type TabNavigationProviderProps = {
@@ -16,7 +18,8 @@ export const TabNavigationContext = createContext<TabNavigationContextType | und
 export const TabNavigationProvider: FC<TabNavigationProviderProps> = ({ children }) => {
   const [currentStep, setCurrentStep] = useState<string>("1");
   const [steps, setSteps] = useState<number>(0);
-  const value = { currentStep, setCurrentStep, steps, setSteps };
+  const [defaultActive, setDefaultActive] = useState<boolean>(true);
+  const value = { currentStep, setCurrentStep, steps, setSteps, defaultActive, setDefaultActive };
 
   return (
     <TabNavigationContext.Provider value={value}>

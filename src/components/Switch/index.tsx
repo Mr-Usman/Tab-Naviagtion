@@ -1,9 +1,23 @@
-const Switch = () => {
+import useTabNavigation from '../../hooks/useTabNavigation';
+import { Slider, Switch, SwitchWrapper } from './styled';
+
+const ToggleSwitch = ({ round = false }) => {
+    const { setDefaultActive } = useTabNavigation();
     return (
-        <div>
-            Switch
-        </div>
+        <Switch>
+            <input onChange={() => setDefaultActive(prev => !prev)} type="checkbox" />
+            <Slider round={round} />
+        </Switch>
     )
 };
 
-export default Switch;
+
+const SwitchComponent = () => {
+    return (
+        <SwitchWrapper>
+           <ToggleSwitch round />
+        </SwitchWrapper>
+    )
+};
+
+export default SwitchComponent;
